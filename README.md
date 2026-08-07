@@ -1,4 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CafeAI ☕
+
+AI-powered cafe website builder.
+
+## Overview
+
+CafeAI helps cafe owners create beautiful websites using AI.
+
+## Features
+
+- Modern cafe landing page
+- AI website generation concept
+- Responsive design
+- Next.js + TypeScript
+- Tailwind CSS
+
+## Tech Stack
+
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+
+## Author
+
+Benjamin Lee
 
 ## Getting Started
 
