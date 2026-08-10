@@ -15,7 +15,6 @@ export default function Home() {
 
 
   const generateCafe = () => {
-
     setLoading(true);
     setGenerated(false);
     setProgress(0);
@@ -23,22 +22,18 @@ export default function Home() {
     let value = 0;
 
     const timer = setInterval(() => {
-
-      value += 10;
+      value += 2;
 
       setProgress(value);
 
-      if(value >= 100){
-
+      if (value >= 100) {
         clearInterval(timer);
 
+        setProgress(100);
         setLoading(false);
         setGenerated(true);
-
       }
-
-    },300);
-
+    }, 60);
   };
 
     const themeColors = {
@@ -186,23 +181,23 @@ export default function Home() {
 
               <div
               className="
-              mt-5
-              h-3
-              bg-gray-700
-              rounded-full
-              overflow-hidden
+                mt-5
+                h-3
+                bg-gray-700
+                rounded-full
+                overflow-hidden
               "
               >
 
               <div
               className="
               h-full
-              bg-amber-500
               transition-all
               duration-300
               "
               style={{
-              width:`${progress}%`
+                width: `${progress}%`,
+                backgroundColor: currentTheme.accent,
               }}
               />
 
@@ -224,6 +219,7 @@ export default function Home() {
       </section>
 
 
+      
       {/* AI Preview Section */}
       <section className="px-6 py-20">
 
@@ -235,141 +231,166 @@ export default function Home() {
 
           <div
             className="
-            mt-12
-            rounded-3xl
-            bg-white/10
-            backdrop-blur-lg
-            border
-            border-white/20
-            p-8
+              mt-12
+              bg-white/10
+              backdrop-blur-lg
+              border
+              border-white/20
+              p-8
+              transition-all
+              duration-500
             "
+            style={{
+              borderRadius: currentStyle.borderRadius,
+              fontFamily: currentStyle.fontFamily,
+              letterSpacing: currentStyle.letterSpacing,
+            }}
           >
 
+            {/* Cafe Preview */}
             <div
               className="
-              h-72
-              rounded-2xl
-              bg-gradient-to-br
-              from-amber-900
-              to-black
-              flex
-              items-center
-              justify-center
+                h-72
+                rounded-2xl
+                bg-gradient-to-br
+                from-amber-900
+                to-black
+                flex
+                items-center
+                justify-center
+                text-center
+                transition-all
+                duration-500
               "
             >
 
-              <div
-                className="
-                h-80
-                rounded-2xl
-                overflow-hidden
-                relative
-                "
+              <div>
+                <h3
+                  className="font-bold"
+                  style={{
+                    fontSize:
+                      style === "Luxury"
+                        ? "36px"
+                        : style === "Vintage"
+                        ? "34px"
+                        : style === "Minimal"
+                        ? "28px"
+                        : "32px",
+                  }}
                 >
-
-                <img
-                src="/images/cafe-preview.jpg"
-                alt="Cafe Preview"
-                className="
-                w-full
-                h-full
-                object-cover
-                "
-                />
-
-
-                <div
-                className="
-                absolute
-                bottom-0
-                left-0
-                right-0
-                bg-black/60
-                p-6
-                "
-                >
-
-                <h3 className="text-3xl font-bold">
-                {cafeName || "Moonlight Coffee"}
+                  Moonlight Coffee
                 </h3>
 
-                <p className="text-gray-300 mt-2">
-                AI Generated Premium Cafe
+                <p className="mt-2 text-gray-300">
+                  AI Generated Premium Cafe
                 </p>
-
-                </div>
-
-                </div>
-
-                <div className="
-                    mt-6
-                    grid
-                    md:grid-cols-3
-                    gap-4
-                    ">
-
-                    <div className="
-                    bg-black/40
-                    rounded-xl
-                    p-4
-                    ">
-                    ☕ Espresso
-                    <br/>
-                    $4
-                    </div>
-
-
-                    <div className="
-                    bg-black/40
-                    rounded-xl
-                    p-4
-                    ">
-                    🍰 Signature Cake
-                    <br/>
-                    $6
-                    </div>
-
-
-                    <div className="
-                    bg-black/40
-                    rounded-xl
-                    p-4
-                    ">
-                    🥐 Croissant
-                    <br/>
-                    $5
-                    </div>
-
-
-                    </div>
+              </div>
 
             </div>
 
+            {/* Menu */}
+            <div className="mt-6 grid md:grid-cols-3 gap-4">
 
+              {menuItems.map((item) => (
+
+              <div
+                key={item.name}
+                className="rounded-xl border"
+                style={{
+                  backgroundColor: currentTheme.background,
+                  color: currentTheme.text,
+                  borderColor: currentTheme.accent,
+                  padding:
+                    style === "Luxury"
+                      ? "24px"
+                      : style === "Vintage"
+                      ? "20px"
+                      : style === "Minimal"
+                      ? "14px"
+                      : "20px",
+                }}
+              >
+              <div
+                className="text-4xl mb-3"
+                style={{
+                  color: currentTheme.accent,
+                }}
+              >
+                {item.icon}
+              </div>
+
+              <h4
+                className="font-bold"
+                style={{
+                  fontSize:
+                    style === "Luxury"
+                      ? "22px"
+                      : style === "Vintage"
+                      ? "20px"
+                      : style === "Minimal"
+                      ? "18px"
+                      : "20px",
+                }}
+              >
+                {item.name}
+              </h4>
+
+              <div
+                className="mt-4 font-bold"
+                style={{
+                  color: currentTheme.accent,
+                }}
+              >
+                {item.price}
+              </div>
+              </div>
+
+              ))}
+
+            </div>
+
+            {/* Style Buttons */}
             <div className="grid md:grid-cols-4 gap-4 mt-8">
 
               {[
                 "Modern",
                 "Luxury",
                 "Vintage",
-                "Minimal"
-              ].map((style) => (
+                "Minimal",
+              ].map((styleName) => (
 
-                <button
-                  key={style}
-                  className="
-                  rounded-xl
-                  bg-black/40
-                  border
-                  border-white/20
-                  py-3
-                  hover:bg-amber-500
-                  hover:text-black
-                  transition
-                  "
-                >
-                  {style}
-                </button>
+            <button
+              key={styleName}
+              onClick={() => setStyle(styleName)}
+              className="
+                p-4
+                rounded-xl
+                border
+                font-bold
+                transition-all
+                duration-300
+              "
+              style={{
+                backgroundColor:
+                  style === styleName
+                    ? currentTheme.accent
+                    : currentTheme.background,
+
+                color:
+                  style === styleName
+                    ? currentTheme.text
+                    : currentTheme.text,
+
+                borderColor: currentTheme.accent,
+
+                opacity:
+                  style === styleName
+                    ? 1
+                    : 0.7,
+              }}
+            >
+              {styleName}
+            </button>
 
               ))}
 
@@ -388,51 +409,42 @@ export default function Home() {
         <h2 className="text-4xl font-bold text-center">
           Powerful Cafe Creation Tools
         </h2>
+        
+            <div className="max-w-5xl mx-auto mt-12 grid md:grid-cols-4 gap-4">
 
-
-        <div
-          className="
-          max-w-5xl
-          mx-auto
-          grid
-          md:grid-cols-4
-          gap-6
-          mt-12
-          "
-        >
-
-          {[
-            ["☕","AI Branding"],
-            ["🎨","Smart Design"],
-            ["📱","Responsive"],
-            ["🌎","Global Templates"]
-          ].map(([icon,title]) => (
-
-            <div
-              key={title}
-              className="
-              rounded-2xl
-              bg-white/10
-              border
-              border-white/20
-              p-6
-              text-center
-              "
-            >
-
-              <div className="text-4xl">
-                {icon}
-              </div>
-
-              <h3 className="mt-4 font-semibold">
-                {title}
-              </h3>
-
+            <div className="bg-white/10 border border-white/20 rounded-xl p-6 text-center">
+              <div className="text-3xl mb-3">☕</div>
+              <h3 className="font-bold">AI Branding</h3>
+              <p className="text-sm text-gray-400 mt-2">
+                Generate a beautiful cafe identity with AI.
+              </p>
             </div>
 
-          ))}
+            <div className="bg-white/10 border border-white/20 rounded-xl p-6 text-center">
+              <div className="text-3xl mb-3">🎨</div>
+              <h3 className="font-bold">Smart Design</h3>
+              <p className="text-sm text-gray-400 mt-2">
+                Choose a style that matches your cafe.
+              </p>
+            </div>
 
-        </div>
+            <div className="bg-white/10 border border-white/20 rounded-xl p-6 text-center">
+              <div className="text-3xl mb-3">📱</div>
+              <h3 className="font-bold">Responsive</h3>
+              <p className="text-sm text-gray-400 mt-2">
+                Create websites that work on every device.
+              </p>
+            </div>
+
+            <div className="bg-white/10 border border-white/20 rounded-xl p-6 text-center">
+              <div className="text-3xl mb-3">🌎</div>
+              <h3 className="font-bold">Global Templates</h3>
+              <p className="text-sm text-gray-400 mt-2">
+                Build cafe websites for customers anywhere.
+              </p>
+            </div>
+
+          </div>
 
         </section>
 
@@ -525,20 +537,22 @@ export default function Home() {
 
         </div>
 
-          <button
-      onClick={generateCafe}
-      className="
-      mt-8
-      w-full
-      py-4
-      rounded-full
-      bg-amber-500
-      text-black
-      font-bold
-      "
-      >
-      Generate Website
-      </button>
+        <button
+          onClick={generateCafe}
+          className="
+            mt-8
+            w-full
+            py-4
+            rounded-full
+            font-bold
+          "
+          style={{
+            backgroundColor: currentTheme.accent,
+            color: currentTheme.text,
+          }}
+        >
+          Generate Website
+        </button>
 
 
       {/* AI Loading Display */}
@@ -546,14 +560,16 @@ export default function Home() {
       {loading && (
 
       <div
-      className="
-      mt-10
-      rounded-2xl
-      bg-black/50
-      p-8
-      border
-      border-amber-500/40
-      "
+        className="
+          mt-10
+          rounded-2xl
+          bg-black/50
+          p-8
+          border
+        "
+        style={{
+          borderColor: currentTheme.accent,
+        }}
       >
 
       <h3 className="text-2xl font-bold">
@@ -622,33 +638,68 @@ export default function Home() {
       {/* Website Header */}
 
       <div
-      className="
-      p-6
-      flex
-      justify-between
-      items-center
-      border-b
-      "
+        className="
+          flex
+          justify-between
+          items-center
+          border-b
+        "
+        style={{
+          padding:
+            style === "Luxury"
+              ? "24px"
+              : style === "Vintage"
+              ? "20px"
+              : style === "Minimal"
+              ? "14px"
+              : "20px",
+
+          borderColor: currentTheme.accent,
+        }}
       >
 
-      <h2 className="text-2xl font-bold">
-      {cafeName || "Moonlight Coffee"}
+      <h2
+        className="font-bold"
+        style={{
+          fontSize:
+            style === "Luxury"
+              ? "28px"
+              : style === "Vintage"
+              ? "26px"
+              : style === "Minimal"
+              ? "20px"
+              : "24px",
+        }}
+      >
+        {cafeName || "Moonlight Coffee"}
       </h2>
 
-      <p className="text-sm text-gray-500">
+      <p
+        className="text-sm"
+        style={{
+          color: currentTheme.text,
+          opacity: 0.6,
+        }}
+      >
         {location || "Downtown"}
       </p>
 
       <button
         className="
-          px-5
-          py-2
-          text-white
+          font-bold
         "
         style={{
           backgroundColor: currentTheme.accent,
           color: currentTheme.text,
           borderRadius: currentStyle.borderRadius,
+          padding:
+            style === "Luxury"
+              ? "12px 24px"
+              : style === "Vintage"
+              ? "10px 22px"
+              : style === "Minimal"
+              ? "8px 18px"
+              : "10px 20px",
         }}
       >
         Reserve
@@ -662,20 +713,39 @@ export default function Home() {
       {/* Hero */}
 
       <div
-      className="
-      h-72
-      relative
-      "
+        className="
+          relative
+        "
+        style={{
+          height:
+            style === "Luxury"
+              ? "360px"
+              : style === "Vintage"
+              ? "340px"
+              : style === "Minimal"
+              ? "280px"
+              : "320px",
+        }}
       >
 
       <img
-      src="/images/cafe-preview.jpg"
-      alt="Generated Cafe"
-      className="
-      w-full
-      h-full
-      object-cover
-      "
+        src="/images/cafe-preview.jpg"
+        alt="Generated Cafe"
+        className="
+          w-full
+          h-full
+          object-cover
+        "
+        style={{
+          filter:
+            style === "Luxury"
+              ? "brightness(0.75) contrast(1.1)"
+              : style === "Vintage"
+              ? "sepia(0.18) contrast(1.05)"
+              : style === "Minimal"
+              ? "brightness(1.05) contrast(0.95)"
+              : "none",
+        }}
       />
 
 
@@ -703,19 +773,37 @@ export default function Home() {
       <div>
 
       <h1
-        className="text-5xl font-bold text-white"
+        className="text-5xl font-bold"
         style={{
-          fontSize: style === "Luxury" ? "56px" : "48px",
+        fontSize:
+          style === "Luxury"
+            ? "56px"
+            : style === "Vintage"
+            ? "52px"
+            : style === "Minimal"
+            ? "42px"
+            : "48px",
           letterSpacing: currentStyle.letterSpacing,
+          color: currentTheme.text,
         }}
       >
         Welcome to {cafeName || "Moonlight Coffee"}
       </h1>
 
       <p
-        className="mt-4 text-xl text-white"
+        className="mt-4"
         style={{
+          fontSize:
+            style === "Luxury"
+              ? "20px"
+              : style === "Vintage"
+              ? "19px"
+              : style === "Minimal"
+              ? "16px"
+              : "18px",
+
           letterSpacing: currentStyle.letterSpacing,
+          color: currentTheme.text,
         }}
       >
         A memorable cafe experience in {location || "Downtown"}
@@ -729,15 +817,23 @@ export default function Home() {
 
       </div>
 
-
-
       {/* Menu */}
 
-      <div className="p-8">
-
+      <div
+        style={{
+          padding:
+            style === "Luxury"
+              ? "40px"
+              : style === "Vintage"
+              ? "32px"
+              : style === "Minimal"
+              ? "24px"
+              : "32px",
+        }}
+      >
 
       <h3
-        className="font-bold"
+        className="font-bold mb-6"
         style={{
           fontSize:
             style === "Luxury"
@@ -747,6 +843,8 @@ export default function Home() {
               : style === "Minimal"
               ? "28px"
               : "32px",
+
+          color: currentTheme.accent,
         }}
       >
         Our Menu
@@ -754,46 +852,70 @@ export default function Home() {
 
 
       <div
-      className="
-      grid
-      md:grid-cols-2
-      lg:grid-cols-3
-      gap-5
-      mt-6
-      "
+        className="
+          grid
+          md:grid-cols-2
+          lg:grid-cols-3
+          gap-5
+          mt-6
+        "
       >
+        {menuItems.map((item) => (
+          <div
+            key={item.name}
+            className="rounded-xl border"
+            style={{
+              backgroundColor: currentTheme.background,
+              color: currentTheme.text,
+              borderColor: currentTheme.accent,
+              padding:
+                style === "Luxury"
+                  ? "24px"
+                  : style === "Vintage"
+                  ? "20px"
+                  : style === "Minimal"
+                  ? "14px"
+                  : "20px",
+            }}
+          >
+            <div
+              className="text-4xl mb-3"
+              style={{
+                color: currentTheme.accent,
+              }}
+            >
+              {item.icon}
+            </div>
 
-    {menuItems.map((item) => (
-      <div
-        key={item.name}
-        className="rounded-xl border"
-        style={{
-          backgroundColor: currentTheme.background,
-          color: currentTheme.text,
-          borderColor: currentTheme.accent,
-          padding:
-            style === "Luxury"
-              ? "24px"
-              : style === "Vintage"
-              ? "20px"
-              : style === "Minimal"
-              ? "14px"
-              : "20px",
-        }}
-      >
-        {item.icon} {item.name}
-        <br />
-        {item.price}
+            <h4
+              className="font-bold"
+              style={{
+                fontSize:
+                  style === "Luxury"
+                    ? "22px"
+                    : style === "Vintage"
+                    ? "20px"
+                    : style === "Minimal"
+                    ? "18px"
+                    : "20px",
+              }}
+            >
+              {item.name}
+            </h4>
+
+            <div
+              className="mt-4 font-bold"
+              style={{
+                color: currentTheme.accent,
+              }}
+            >
+              {item.price}
+            </div>
+          </div>
+        ))}
       </div>
-    ))}
-
 
       </div>
-
-
-      </div>
-
-
 
       {/* Footer */}
 
