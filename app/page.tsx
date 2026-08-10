@@ -1,357 +1,898 @@
-import Image from "next/image";
+"use client";
+
+import { useState } from "react";
 
 export default function Home() {
+
+  const [generated, setGenerated] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [progress, setProgress] = useState(0);
+
+  const [cafeName, setCafeName] = useState("");
+  const [style, setStyle] = useState("Modern");
+  const [location, setLocation] = useState("");
+  const [color, setColor] = useState("Dark Brown");
+
+
+  const generateCafe = () => {
+
+    setLoading(true);
+    setGenerated(false);
+    setProgress(0);
+
+    let value = 0;
+
+    const timer = setInterval(() => {
+
+      value += 10;
+
+      setProgress(value);
+
+      if(value >= 100){
+
+        clearInterval(timer);
+
+        setLoading(false);
+        setGenerated(true);
+
+      }
+
+    },300);
+
+  };
+
+    const themeColors = {
+    "Dark Brown": {
+      background: "#2b1b14",
+      text: "#ffffff",
+      accent: "#f59e0b",
+    },
+    "Gold": {
+      background: "#3b2a12",
+      text: "#ffffff",
+      accent: "#facc15",
+    },
+    "Black": {
+      background: "#111111",
+      text: "#ffffff",
+      accent: "#f59e0b",
+    },
+    "Cream": {
+      background: "#f5efe6",
+      text: "#241a14",
+      accent: "#8b5e34",
+    },
+  };
+
+  const styleSettings = {
+    Modern: {
+      borderRadius: "24px",
+      fontFamily: "Arial, sans-serif",
+      letterSpacing: "0px",
+    },
+
+    Luxury: {
+      borderRadius: "12px",
+      fontFamily: "Georgia, serif",
+      letterSpacing: "1px",
+    },
+
+    Vintage: {
+      borderRadius: "8px",
+      fontFamily: "Georgia, serif",
+      letterSpacing: "0.5px",
+    },
+
+    Minimal: {
+      borderRadius: "4px",
+      fontFamily: "Arial, sans-serif",
+      letterSpacing: "0px",
+    },
+  };
+
+    const menuItems = [
+    {
+      name: "Espresso",
+      price: "$4",
+      icon: "☕",
+    },
+    {
+      name: "Signature Cake",
+      price: "$6",
+      icon: "🍰",
+    },
+    {
+      name: "Croissant",
+      price: "$5",
+      icon: "🥐",
+    },
+    {
+      name: "Iced Latte",
+      price: "$5",
+      icon: "🥤",
+    },
+  ];
+  
+  const currentStyle =
+  styleSettings[style as keyof typeof styleSettings];
+
+  const currentTheme = themeColors[color as keyof typeof themeColors];  
+
+
   return (
-    <main className="bg-black text-white min-h-screen">
-
-      {/* HERO SECTION */}
-      <section className="relative h-screen overflow-hidden">
-
-        <Image
-          src="/images/hero-cafe - new.jpg"
-          alt="Cafe interior"
-          fill
-          className="object-cover"
-        />
-
-        <div className="absolute inset-0 bg-black/60"></div>
+    <main className="min-h-screen bg-[#0f0b08] text-white">
 
 
-        {/* Header */}
-        <header className="relative z-10 flex justify-between items-center px-10 py-8">
+      {/* Hero Section */}
+      <section className="relative min-h-screen flex flex-col items-center justify-center px-6 text-center">
 
-          <h1 className="text-3xl font-bold">
-            ☕ CafeAI
+        
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,#5c3b24,transparent_50%)]" />
+
+        <div className="relative z-10 max-w-4xl">
+
+          <h1 className="text-6xl md:text-7xl font-bold tracking-tight">
+            Cafe<span className="text-amber-400">AI</span>
           </h1>
 
-
-          <nav className="space-x-8">
-            <span>Features</span>
-            <span>Templates</span>
-            <span>Pricing</span>
-
-            <button className="bg-orange-500 px-6 py-3 rounded-full">
-              Start Creating
-            </button>
-
-          </nav>
-
-        </header>
-
-
-
-        {/* Hero Text */}
-
-        <div className="relative z-10 flex flex-col items-center justify-center h-full text-center">
-
-          <h2 className="text-6xl font-bold">
-            Create Your Cafe Website
-            <br/>
-            with AI
-          </h2>
-
-
-          <p className="text-xl text-gray-300 mt-6">
-            Build a beautiful cafe website in minutes.
-            <br/>
-            No coding required.
+          <p className="mt-6 text-xl md:text-2xl text-gray-300">
+            Create your dream cafe website with Artificial Intelligence.
           </p>
 
+            <button
+            onClick={generateCafe}
+            className="
+            mt-10
+            px-10
+            py-4
+            rounded-full
+            bg-amber-500
+            text-black
+            font-semibold
+            text-lg
+            hover:bg-amber-400
+            transition
+            "
+            >
+            Generate My Cafe Website
+            </button>  
 
-          <button className="mt-10 bg-orange-500 px-10 py-4 rounded-full text-lg">
-            Create Website Now
-          </button>
+
+              {loading && (
+
+              <div
+              className="
+              mt-8
+              w-full
+              max-w-md
+              mx-auto
+              rounded-2xl
+              bg-black/50
+              border
+              border-amber-500/40
+              p-6
+              "
+              >
+
+              <h3 className="text-xl font-bold">
+              ☕ CafeAI is creating...
+              </h3>
+
+
+              <p className="mt-4 text-gray-300">
+              Analyzing cafe style...
+              </p>
+
+
+              <div
+              className="
+              mt-5
+              h-3
+              bg-gray-700
+              rounded-full
+              overflow-hidden
+              "
+              >
+
+              <div
+              className="
+              h-full
+              bg-amber-500
+              transition-all
+              duration-300
+              "
+              style={{
+              width:`${progress}%`
+              }}
+              />
+
+              </div>
+
+
+              <p className="mt-3">
+              {progress}% Complete
+              </p>
+
+
+              </div>
+
+              )}
+              
 
         </div>
 
       </section>
 
 
+      {/* AI Preview Section */}
+      <section className="px-6 py-20">
 
-      {/* FEATURES */}
+        <div className="max-w-5xl mx-auto">
 
-      <section className="py-24 px-10">
+          <h2 className="text-4xl font-bold text-center">
+            AI Cafe Preview
+          </h2>
 
-        <h2 className="text-4xl text-center font-bold mb-16">
-          Powerful Cafe Design Tools
+          <div
+            className="
+            mt-12
+            rounded-3xl
+            bg-white/10
+            backdrop-blur-lg
+            border
+            border-white/20
+            p-8
+            "
+          >
+
+            <div
+              className="
+              h-72
+              rounded-2xl
+              bg-gradient-to-br
+              from-amber-900
+              to-black
+              flex
+              items-center
+              justify-center
+              "
+            >
+
+              <div
+                className="
+                h-80
+                rounded-2xl
+                overflow-hidden
+                relative
+                "
+                >
+
+                <img
+                src="/images/cafe-preview.jpg"
+                alt="Cafe Preview"
+                className="
+                w-full
+                h-full
+                object-cover
+                "
+                />
+
+
+                <div
+                className="
+                absolute
+                bottom-0
+                left-0
+                right-0
+                bg-black/60
+                p-6
+                "
+                >
+
+                <h3 className="text-3xl font-bold">
+                {cafeName || "Moonlight Coffee"}
+                </h3>
+
+                <p className="text-gray-300 mt-2">
+                AI Generated Premium Cafe
+                </p>
+
+                </div>
+
+                </div>
+
+                <div className="
+                    mt-6
+                    grid
+                    md:grid-cols-3
+                    gap-4
+                    ">
+
+                    <div className="
+                    bg-black/40
+                    rounded-xl
+                    p-4
+                    ">
+                    ☕ Espresso
+                    <br/>
+                    $4
+                    </div>
+
+
+                    <div className="
+                    bg-black/40
+                    rounded-xl
+                    p-4
+                    ">
+                    🍰 Signature Cake
+                    <br/>
+                    $6
+                    </div>
+
+
+                    <div className="
+                    bg-black/40
+                    rounded-xl
+                    p-4
+                    ">
+                    🥐 Croissant
+                    <br/>
+                    $5
+                    </div>
+
+
+                    </div>
+
+            </div>
+
+
+            <div className="grid md:grid-cols-4 gap-4 mt-8">
+
+              {[
+                "Modern",
+                "Luxury",
+                "Vintage",
+                "Minimal"
+              ].map((style) => (
+
+                <button
+                  key={style}
+                  className="
+                  rounded-xl
+                  bg-black/40
+                  border
+                  border-white/20
+                  py-3
+                  hover:bg-amber-500
+                  hover:text-black
+                  transition
+                  "
+                >
+                  {style}
+                </button>
+
+              ))}
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      {/* Features */}
+      <section className="px-6 py-20">
+
+        <h2 className="text-4xl font-bold text-center">
+          Powerful Cafe Creation Tools
         </h2>
 
 
+        <div
+          className="
+          max-w-5xl
+          mx-auto
+          grid
+          md:grid-cols-4
+          gap-6
+          mt-12
+          "
+        >
 
-        <div className="grid md:grid-cols-3 gap-10">
+          {[
+            ["☕","AI Branding"],
+            ["🎨","Smart Design"],
+            ["📱","Responsive"],
+            ["🌎","Global Templates"]
+          ].map(([icon,title]) => (
 
+            <div
+              key={title}
+              className="
+              rounded-2xl
+              bg-white/10
+              border
+              border-white/20
+              p-6
+              text-center
+              "
+            >
 
-          <Feature
-            image="/images/coffee-cup.jpg"
-            title="AI Coffee Branding"
-            text="Generate beautiful cafe concepts automatically."
-          />
+              <div className="text-4xl">
+                {icon}
+              </div>
 
+              <h3 className="mt-4 font-semibold">
+                {title}
+              </h3>
 
-          <Feature
-            image="/images/cafe-interior.jpg"
-            title="Interior Design"
-            text="Create modern cafe spaces with AI."
-          />
+            </div>
 
-
-          <Feature
-            image="/images/menu-board.jpg"
-            title="Smart Menu Creation"
-            text="Design professional menus instantly."
-          />
+          ))}
 
         </div>
 
-      </section>
+        </section>
+
+        <section className="px-6 py-20">
+
+        <div className="max-w-4xl mx-auto">
+
+        <h2 className="text-4xl font-bold text-center">
+        Create Your Cafe With AI
+        </h2>
 
 
+        <div className="
+        mt-12
+        bg-white/10
+        border
+        border-white/20
+        rounded-3xl
+        p-8
+        ">
+
+        <div className="grid md:grid-cols-2 gap-6">
 
 
-      {/* GALLERY */}
+        <input
+        className="
+        bg-black/40
+        rounded-xl
+        p-4
+        border
+        border-white/20
+        "
+        placeholder="Cafe Name"
+        value={cafeName}
+        onChange={(e)=>setCafeName(e.target.value)}
+        />
 
-      <section className="px-10 pb-24">
+
+        <input
+        className="
+        bg-black/40
+        rounded-xl
+        p-4
+        border
+        border-white/20
+        "
+        placeholder="Location"
+        value={location}
+        onChange={(e)=>setLocation(e.target.value)}
+        />
 
 
-{/* DESIGN TOOLS */}
-<section className="relative z-10 px-6 py-24 bg-black text-white">
+        <select
+        className="
+        bg-black/40
+        rounded-xl
+        p-4
+        border
+        border-white/20
+        "
+        onChange={(e)=>setStyle(e.target.value)}
+        >
 
-  <div className="max-w-7xl mx-auto">
+        <option>Modern</option>
+        <option>Luxury</option>
+        <option>Vintage</option>
+        <option>Minimal</option>
 
-    {/* Section heading */}
-    <div className="text-center mb-14">
-      <p className="text-orange-400 font-semibold tracking-widest uppercase text-sm">
-        Everything you need
+        </select>
+
+
+        <select
+        className="
+        bg-black/40
+        rounded-xl
+        p-4
+        border
+        border-white/20
+        "
+        onChange={(e)=>setColor(e.target.value)}
+        >
+
+        <option>Dark Brown</option>
+        <option>Gold</option>
+        <option>Black</option>
+        <option>Cream</option>
+
+        </select>
+
+
+        </div>
+
+          <button
+      onClick={generateCafe}
+      className="
+      mt-8
+      w-full
+      py-4
+      rounded-full
+      bg-amber-500
+      text-black
+      font-bold
+      "
+      >
+      Generate Website
+      </button>
+
+
+      {/* AI Loading Display */}
+
+      {loading && (
+
+      <div
+      className="
+      mt-10
+      rounded-2xl
+      bg-black/50
+      p-8
+      border
+      border-amber-500/40
+      "
+      >
+
+      <h3 className="text-2xl font-bold">
+      ☕ CafeAI is creating your website...
+      </h3>
+
+      <p className="mt-4">
+      Analyzing cafe style...
       </p>
 
-      <h2 className="text-4xl md:text-5xl font-bold mt-3">
-        Powerful Cafe Design Tools
+
+      <div
+      className="
+      mt-6
+      h-4
+      bg-gray-700
+      rounded-full
+      overflow-hidden
+      "
+      >
+
+      <div
+      className="
+      h-full
+      bg-amber-500
+      transition-all
+      "
+      style={{
+      width:`${progress}%`
+      }}
+      />
+
+      </div>
+
+
+      <p className="mt-3">
+      {progress}% Complete
+      </p>
+
+
+      </div>
+
+      )}
+
+
+      {/* Generated Result */}
+
+
+      {generated && (
+
+      <div
+        className="
+          mt-10
+          overflow-hidden
+          shadow-2xl
+        "
+      style={{
+        backgroundColor: currentTheme.background,
+        color: currentTheme.text,
+        borderRadius: currentStyle.borderRadius,
+        fontFamily: currentStyle.fontFamily,
+        letterSpacing: currentStyle.letterSpacing,
+      }}
+      >
+
+      {/* Website Header */}
+
+      <div
+      className="
+      p-6
+      flex
+      justify-between
+      items-center
+      border-b
+      "
+      >
+
+      <h2 className="text-2xl font-bold">
+      {cafeName || "Moonlight Coffee"}
       </h2>
 
-      <p className="text-gray-400 max-w-2xl mx-auto mt-5 text-lg">
-        Create a beautiful cafe website with AI-powered tools
-        designed specifically for modern cafes.
+      <p className="text-sm text-gray-500">
+        {location || "Downtown"}
       </p>
-    </div>
 
+      <button
+        className="
+          px-5
+          py-2
+          text-white
+        "
+        style={{
+          backgroundColor: currentTheme.accent,
+          color: currentTheme.text,
+          borderRadius: currentStyle.borderRadius,
+        }}
+      >
+        Reserve
+      </button>
 
-    {/* Tool cards */}
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-
-      {/* Card 1 */}
-      <div className="group rounded-2xl overflow-hidden bg-zinc-900 border border-zinc-800 hover:border-orange-500 transition-all duration-300">
-
-        <div className="relative h-64 overflow-hidden">
-          <Image
-            src="/images/cafe-interior.jpg"
-            alt="AI Cafe Designer"
-            fill
-            className="object-cover group-hover:scale-110 transition-transform duration-700"
-          />
-
-          <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all" />
-        </div>
-
-        <div className="p-7">
-          <div className="text-3xl mb-4">☕</div>
-
-          <h3 className="text-2xl font-bold">
-            AI Cafe Designer
-          </h3>
-
-          <p className="text-gray-400 mt-3 leading-relaxed">
-            Generate a complete cafe website design from
-            your business idea in seconds.
-          </p>
-
-          <button className="mt-6 text-orange-400 font-semibold hover:text-orange-300 transition">
-            Explore Designer →
-          </button>
-        </div>
 
       </div>
 
 
-      {/* Card 2 */}
-      <div className="group rounded-2xl overflow-hidden bg-zinc-900 border border-zinc-800 hover:border-orange-500 transition-all duration-300">
 
-        <div className="relative h-64 overflow-hidden">
-          <Image
-            src="/images/color-palette.jpg"
-            alt="Brand and Color Studio"
-            fill
-            className="object-cover group-hover:scale-110 transition-transform duration-700"
-          />
+      {/* Hero */}
 
-          <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all" />
-        </div>
+      <div
+      className="
+      h-72
+      relative
+      "
+      >
 
-        <div className="p-7">
-          <div className="text-3xl mb-4">🎨</div>
+      <img
+      src="/images/cafe-preview.jpg"
+      alt="Generated Cafe"
+      className="
+      w-full
+      h-full
+      object-cover
+      "
+      />
 
-          <h3 className="text-2xl font-bold">
-            Brand & Color Studio
-          </h3>
 
-          <p className="text-gray-400 mt-3 leading-relaxed">
-            Choose beautiful colors, styles and visual themes
-            that match your cafe's personality.
-          </p>
+      <div
+      className="
+      absolute
+      inset-0
+      flex
+      items-center
+      justify-center
+      text-center
+      "
+      style={{
+        backgroundColor:
+          style === "Luxury"
+            ? "rgba(0,0,0,0.55)"
+            : style === "Vintage"
+            ? "rgba(0,0,0,0.48)"
+            : style === "Minimal"
+            ? "rgba(0,0,0,0.30)"
+            : "rgba(0,0,0,0.40)",
+      }}
+      >
 
-          <button className="mt-6 text-orange-400 font-semibold hover:text-orange-300 transition">
-            Explore Studio →
-          </button>
-        </div>
+      <div>
+
+      <h1
+        className="text-5xl font-bold text-white"
+        style={{
+          fontSize: style === "Luxury" ? "56px" : "48px",
+          letterSpacing: currentStyle.letterSpacing,
+        }}
+      >
+        Welcome to {cafeName || "Moonlight Coffee"}
+      </h1>
+
+      <p
+        className="mt-4 text-xl text-white"
+        style={{
+          letterSpacing: currentStyle.letterSpacing,
+        }}
+      >
+        A memorable cafe experience in {location || "Downtown"}
+      </p>
+
+
+      </div>
 
       </div>
 
 
-      {/* Card 3 */}
-      <div className="group rounded-2xl overflow-hidden bg-zinc-900 border border-zinc-800 hover:border-orange-500 transition-all duration-300">
+      </div>
 
-        <div className="relative h-64 overflow-hidden">
-          <Image
-            src="/images/menu-board.jpg"
-            alt="Smart Menu Builder"
-            fill
-            className="object-cover group-hover:scale-110 transition-transform duration-700"
-          />
 
-          <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all" />
-        </div>
 
-        <div className="p-7">
-          <div className="text-3xl mb-4">📋</div>
+      {/* Menu */}
 
-          <h3 className="text-2xl font-bold">
-            Smart Menu Builder
-          </h3>
+      <div className="p-8">
 
-          <p className="text-gray-400 mt-3 leading-relaxed">
-            Turn your coffee and food menu into a beautiful
-            digital menu automatically.
-          </p>
 
-          <button className="mt-6 text-orange-400 font-semibold hover:text-orange-300 transition">
-            Build Your Menu →
-          </button>
-        </div>
+      <h3
+        className="font-bold"
+        style={{
+          fontSize:
+            style === "Luxury"
+              ? "36px"
+              : style === "Vintage"
+              ? "34px"
+              : style === "Minimal"
+              ? "28px"
+              : "32px",
+        }}
+      >
+        Our Menu
+      </h3>
+
+
+      <div
+      className="
+      grid
+      md:grid-cols-2
+      lg:grid-cols-3
+      gap-5
+      mt-6
+      "
+      >
+
+    {menuItems.map((item) => (
+      <div
+        key={item.name}
+        className="rounded-xl border"
+        style={{
+          backgroundColor: currentTheme.background,
+          color: currentTheme.text,
+          borderColor: currentTheme.accent,
+          padding:
+            style === "Luxury"
+              ? "24px"
+              : style === "Vintage"
+              ? "20px"
+              : style === "Minimal"
+              ? "14px"
+              : "20px",
+        }}
+      >
+        {item.icon} {item.name}
+        <br />
+        {item.price}
+      </div>
+    ))}
+
 
       </div>
 
-    </div>
 
-  </div>
-
-</section>
+      </div>
 
 
 
-        <div className="grid md:grid-cols-4 gap-6">
+      {/* Footer */}
+
+      <div
+        className="
+          text-center
+        "
+        style={{
+          backgroundColor: currentTheme.accent,
+          color: currentTheme.text,
+          padding:
+            style === "Luxury"
+              ? "28px"
+              : style === "Vintage"
+              ? "24px"
+              : style === "Minimal"
+              ? "16px"
+              : "24px",
+        }}
+      >
+
+      Open Daily
+      <br/>
+      8:00 AM - 10:00 PM
+
+      </div>
 
 
-          <Gallery img="/images/dessert.jpg"/>
-          <Gallery img="/images/cafe-team.jpg"/>
-          <Gallery img="/images/color-palette.jpg"/>
-          <Gallery img="/images/texture-wood.jpg"/>
+      </div>
+
+      )}
+
+      {generated && (
+
+        
+      <div
+      className="
+      mt-10
+      rounded-2xl
+      bg-black/50
+      p-8
+      border
+      border-amber-500/40
+      "
+      >
+
+      <h3 className="text-3xl font-bold">
+      {cafeName || "Your Cafe"}
+      </h3>
 
 
-        </div>
+      <p className="mt-3 text-gray-300">
+      AI generated style:
+      {style}
+      </p>
 
 
-      </section>
+      <p className="text-gray-300">
+      Location:
+      {location || "Global"}
+      </p>
 
 
+      <p className="text-gray-300">
+      Theme:
+      {color}
+      </p>
 
 
-      {/* FOOTER */}
+      <div className="
+      mt-6
+      h-40
+      rounded-xl
+      bg-gradient-to-br
+      from-amber-800
+      to-black
+      flex
+      items-center
+      justify-center
+      ">
 
-      <footer className="border-t border-gray-700 py-10 text-center text-gray-400">
+      <span className="text-2xl">
+      ☕ AI Website Ready
+      </span>
 
-        ☕ CafeAI © 2026  
-        <br/>
-        AI Powered Cafe Website Creator
+      </div>
 
-      </footer>
 
+      </div>
+
+      )}
+
+
+      </div>
+
+      </div>
+
+      </section> 
 
     </main>
   );
-}
-
-
-
-
-function Feature({
-  image,
-  title,
-  text
-}:{
-  image:string;
-  title:string;
-  text:string;
-}){
-
-
-return (
-
-<div className="bg-zinc-900 rounded-xl overflow-hidden">
-
-<Image
-src={image}
-width={600}
-height={400}
-alt={title}
-className="h-60 object-cover"
-/>
-
-
-<div className="p-6">
-
-<h3 className="text-2xl font-bold">
-{title}
-</h3>
-
-
-<p className="text-gray-400 mt-3">
-{text}
-</p>
-
-
-</div>
-
-
-</div>
-
-)
-
-}
-
-
-
-
-
-function Gallery({
-img
-}:{
-img:string
-}){
-
-
-return (
-
-<div className="overflow-hidden rounded-xl">
-
-<Image
-src={img}
-width={500}
-height={500}
-alt="Cafe gallery"
-className="hover:scale-110 transition duration-500"
-/>
-
-</div>
-
-)
-
 }

@@ -61,9 +61,14 @@ export default function Home() {
           🌙 Cozy Night Cafe Experience
         </h3>
 
-        <p className="mt-4 text-gray-400">
-          Dark style • Warm lights • Premium design
-        </p>
+<p
+        className="mt-4"
+        style={{
+          color: currentTheme.text,
+        }}
+      >
+        Dark style • Warm lights • Premium design
+      </p>
 
       </section>
 
