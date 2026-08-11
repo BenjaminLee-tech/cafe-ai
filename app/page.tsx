@@ -117,10 +117,23 @@ export default function Home() {
   ];
   
   const currentStyle =
-  styleSettings[style as keyof typeof styleSettings];
+    styleSettings[style as keyof typeof styleSettings];
 
-  const currentTheme = themeColors[color as keyof typeof themeColors];  
+  const currentTheme = themeColors[color as keyof typeof themeColors];
 
+  const styleDescription = {
+    Modern:
+      "Discover fresh coffee, contemporary flavors, and a welcoming modern atmosphere.",
+
+    Luxury:
+      "Experience handcrafted coffee and refined flavors in an elegant atmosphere.",
+
+    Vintage:
+      "Step into a warm, timeless café where classic flavors meet cozy charm.",
+
+    Minimal:
+      "Simple coffee. Fresh flavors. A quiet place to enjoy your day.",
+  }[style];
 
   return (
     <main className="min-h-screen bg-[#0f0b08] text-white">
@@ -635,7 +648,9 @@ export default function Home() {
       <button
         onClick={() =>
           alert(
-            `Thank you for choosing ${cafeName || "Moonlight Coffee"}! Reservation requests are now available.`
+            `Reservation request for ${cafeName || "Moonlight Coffee"}\nLocation: ${
+              location || "Downtown"
+            }\n\nPlease contact the cafe to complete your reservation.`
           )
         }
         className="
@@ -655,10 +670,7 @@ export default function Home() {
         Reserve
       </button>
 
-
       </div>
-
-
 
       {/* Hero */}
 
@@ -743,26 +755,15 @@ export default function Home() {
         Welcome to {cafeName || "Moonlight Coffee"}
       </h1>
 
-      <p
-        className={`
-          mt-4
-          ${
-            style === "Luxury"
-              ? "text-base md:text-xl"
-              : style === "Vintage"
-              ? "text-base md:text-lg"
-              : style === "Minimal"
-              ? "text-sm md:text-base"
-              : "text-base md:text-lg"
-          }
-        `}
-        style={{
-          letterSpacing: currentStyle.letterSpacing,
-          color: currentTheme.text,
-        }}
-      >
-        A memorable cafe experience in {location || "Downtown"}
-      </p>
+<p
+  className="mt-4"
+  style={{
+    color: currentTheme.text,
+    opacity: 0.8,
+  }}
+>
+  {styleDescription}
+</p>
 
 
       </div>
@@ -802,7 +803,13 @@ export default function Home() {
           color: currentTheme.accent,
         }}
       >
-        Our Menu
+        {style === "Luxury"
+          ? "Signature Menu"
+          : style === "Vintage"
+          ? "Classic Favorites"
+          : style === "Minimal"
+          ? "Menu"
+          : "Our Menu"}
       </h3>
 
 
