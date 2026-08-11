@@ -292,67 +292,6 @@ export default function Home() {
 
             </div>
 
-            {/* Menu */}
-            <div className="mt-6 grid md:grid-cols-3 gap-4">
-
-              {menuItems.map((item) => (
-
-              <div
-                key={item.name}
-                className="rounded-xl border"
-                style={{
-                  backgroundColor: currentTheme.background,
-                  color: currentTheme.text,
-                  borderColor: currentTheme.accent,
-                  padding:
-                    style === "Luxury"
-                      ? "24px"
-                      : style === "Vintage"
-                      ? "20px"
-                      : style === "Minimal"
-                      ? "14px"
-                      : "20px",
-                }}
-              >
-              <div
-                className="text-4xl mb-3"
-                style={{
-                  color: currentTheme.accent,
-                }}
-              >
-                {item.icon}
-              </div>
-
-              <h4
-                className="font-bold"
-                style={{
-                  fontSize:
-                    style === "Luxury"
-                      ? "22px"
-                      : style === "Vintage"
-                      ? "20px"
-                      : style === "Minimal"
-                      ? "18px"
-                      : "20px",
-                }}
-              >
-                {item.name}
-              </h4>
-
-              <div
-                className="mt-4 font-bold"
-                style={{
-                  color: currentTheme.accent,
-                }}
-              >
-                {item.price}
-              </div>
-              </div>
-
-              ))}
-
-            </div>
-
             {/* Style Buttons */}
             <div className="grid md:grid-cols-4 gap-4 mt-8">
 
