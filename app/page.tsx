@@ -596,47 +596,59 @@ export default function Home() {
       }}
       >
 
-      {/* Website Header */}
+  {/* Website Header */}
 
-      <div
-        className="
-          flex
-          justify-between
-          items-center
-          border-b
-        "
-        style={{
-          padding:
-            style === "Luxury"
-              ? "24px"
-              : style === "Vintage"
-              ? "20px"
-              : style === "Minimal"
-              ? "14px"
-              : "20px",
+  <div
+    className="
+      flex
+      flex-col
+      md:flex-row
+      md:justify-between
+      md:items-center
+      gap-5
+      border-b
+    "
+    style={{
+      padding:
+        style === "Luxury"
+          ? "24px 30px"
+          : style === "Vintage"
+          ? "20px 26px"
+          : style === "Minimal"
+          ? "14px 20px"
+          : "20px 24px",
 
-          borderColor: currentTheme.accent,
-        }}
-      >
+      borderColor: currentTheme.accent,
+    }}
+  >
+
+    {/* Cafe Brand */}
+
+    <div className="text-center md:text-left">
 
       <h2
         className="font-bold"
         style={{
           fontSize:
             style === "Luxury"
-              ? "28px"
+              ? "30px"
               : style === "Vintage"
-              ? "26px"
+              ? "27px"
               : style === "Minimal"
-              ? "20px"
-              : "24px",
+              ? "21px"
+              : "25px",
+
+          letterSpacing:
+            style === "Luxury"
+              ? "1.5px"
+              : currentStyle.letterSpacing,
         }}
       >
         {cafeName || "Moonlight Coffee"}
       </h2>
 
       <p
-        className="text-sm"
+        className="text-sm mt-1"
         style={{
           color: currentTheme.text,
           opacity: 0.6,
@@ -645,32 +657,84 @@ export default function Home() {
         {location || "Downtown"}
       </p>
 
+    </div>
+
+
+    {/* Navigation */}
+
+    <div
+      className="
+        flex
+        items-center
+        justify-center
+        gap-4
+        md:gap-6
+        text-sm
+      "
+    >
+
       <button
-        onClick={() =>
-          alert(
-            `Reservation request for ${cafeName || "Moonlight Coffee"}\nLocation: ${
-              location || "Downtown"
-            }\n\nPlease contact the cafe to complete your reservation.`
-          )
-        }
-        className="
-          px-5
-          py-2
-          font-bold
-          transition-all
-          duration-300
-          hover:scale-105
-        "
+        className="transition-opacity hover:opacity-70"
         style={{
-          backgroundColor: currentTheme.accent,
           color: currentTheme.text,
-          borderRadius: currentStyle.borderRadius,
         }}
       >
-        Reserve
+        Home
       </button>
 
-      </div>
+      <button
+        className="transition-opacity hover:opacity-70"
+        style={{
+          color: currentTheme.text,
+        }}
+      >
+        Menu
+      </button>
+
+      <button
+        className="transition-opacity hover:opacity-70"
+        style={{
+          color: currentTheme.text,
+        }}
+      >
+        About
+      </button>
+
+    </div>
+
+
+    {/* Reserve Button */}
+
+    <button
+      onClick={() =>
+        alert(
+          `Reservation request for ${
+            cafeName || "Moonlight Coffee"
+          }\nLocation: ${
+            location || "Downtown"
+          }\n\nPlease contact the cafe to complete your reservation.`
+        )
+      }
+      className="
+        px-6
+        py-2.5
+        font-bold
+        transition-all
+        duration-300
+        hover:scale-105
+        hover:brightness-110
+      "
+      style={{
+        backgroundColor: currentTheme.accent,
+        color: currentTheme.text,
+        borderRadius: currentStyle.borderRadius,
+      }}
+    >
+      Reserve
+    </button>
+
+  </div>
+
 
       {/* Hero */}
 
@@ -691,7 +755,7 @@ export default function Home() {
       >
 
       <img
-        src="/images/cafe-preview.jpg"
+        src="/images/cafe-interior.jpg"
         alt="Generated Cafe"
         className="
           w-full
@@ -712,24 +776,24 @@ export default function Home() {
 
 
       <div
-      className="
-      absolute
-      inset-0
-      flex
-      items-center
-      justify-center
-      text-center
-      "
-      style={{
-        background:
-          style === "Luxury"
-            ? "linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0.70))"
-            : style === "Vintage"
-            ? "linear-gradient(to bottom, rgba(80,50,20,0.20), rgba(40,20,10,0.65))"
-            : style === "Minimal"
-            ? "linear-gradient(to bottom, rgba(255,255,255,0.05), rgba(0,0,0,0.35))"
-            : "linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0.55))",
-      }}
+        className="
+          absolute
+          inset-0
+          flex
+          items-center
+          justify-center
+          text-center
+        "
+        style={{
+          background:
+            style === "Luxury"
+              ? "linear-gradient(to bottom, rgba(0,0,0,0.20), rgba(0,0,0,0.72))"
+              : style === "Vintage"
+              ? "linear-gradient(to bottom, rgba(80,50,20,0.22), rgba(40,20,10,0.68))"
+              : style === "Minimal"
+              ? "linear-gradient(to bottom, rgba(255,255,255,0.12), rgba(0,0,0,0.38))"
+              : "linear-gradient(to bottom, rgba(0,0,0,0.18), rgba(0,0,0,0.62))",
+        }}
       >
 
       <div className="px-4 md:px-8">
@@ -888,26 +952,237 @@ export default function Home() {
 
       </div>
 
-      {/* Footer */}
+    {/* About */}
+
+    <div
+      style={{
+        padding:
+          style === "Luxury"
+            ? "56px 40px"
+            : style === "Vintage"
+            ? "48px 32px"
+            : style === "Minimal"
+            ? "36px 24px"
+            : "48px 32px",
+      }}
+    >
+      <div
+        className="
+          grid
+          md:grid-cols-2
+          gap-8
+          items-center
+        "
+      >
+        <div>
+          <h3
+            className="font-bold"
+            style={{
+              fontSize:
+                style === "Luxury"
+                  ? "36px"
+                  : style === "Vintage"
+                  ? "34px"
+                  : style === "Minimal"
+                  ? "28px"
+                  : "32px",
+              color: currentTheme.accent,
+            }}
+          >
+            About {cafeName || "Moonlight Coffee"}
+          </h3>
+
+          <p
+            className="mt-4 leading-7"
+            style={{
+              opacity: 0.8,
+              fontSize: style === "Minimal" ? "14px" : "16px",
+            }}
+          >
+            A welcoming café created for people who appreciate quality coffee,
+            handcrafted flavors, and memorable moments. We bring together
+            thoughtful ingredients, comfortable surroundings, and a warm
+            atmosphere.
+          </p>
+
+          <p
+            className="mt-4 leading-7"
+            style={{
+              opacity: 0.7,
+              fontSize: style === "Minimal" ? "13px" : "15px",
+            }}
+          >
+            Located in {location || "Downtown"}, we welcome guests every day
+            with freshly prepared coffee, pastries, and signature favorites.
+          </p>
+        </div>
+
+        <div className="overflow-hidden rounded-2xl">
+          <img
+            src="/images/cafe-interior.jpg"
+            alt="Cafe interior"
+            className="w-full h-64 object-cover"
+          />
+        </div>
+      </div>
+    </div>
+
+
+    {/* Gallery */}
+
+    <div
+      style={{
+        padding:
+          style === "Luxury"
+            ? "40px"
+            : style === "Vintage"
+            ? "32px"
+            : style === "Minimal"
+            ? "24px"
+            : "32px",
+      }}
+    >
+      <h3
+        className="font-bold mb-6"
+        style={{
+          fontSize:
+            style === "Luxury"
+              ? "36px"
+              : style === "Vintage"
+              ? "34px"
+              : style === "Minimal"
+              ? "28px"
+              : "32px",
+          color: currentTheme.accent,
+        }}
+      >
+        {style === "Luxury"
+          ? "The Experience"
+          : style === "Vintage"
+          ? "Our Cafe"
+          : style === "Minimal"
+          ? "Gallery"
+          : "Cafe Gallery"}
+      </h3>
 
       <div
         className="
-          text-center
+          grid
+          grid-cols-1
+          md:grid-cols-3
+          gap-4
         "
+      >
+        <div className="overflow-hidden rounded-xl">
+          <img
+            src="/images/cafe-preview.jpg"
+            alt="Cafe"
+            className="w-full h-56 object-cover"
+          />
+        </div>
+
+        <div className="overflow-hidden rounded-xl">
+          <img
+            src="/images/cafe-interior.jpg"
+            alt="Cafe interior"
+            className="w-full h-56 object-cover"
+          />
+        </div>
+
+        <div className="overflow-hidden rounded-xl">
+          <img
+            src="/images/menu-board.jpg"
+            alt="Cafe menu"
+            className="w-full h-56 object-cover"
+          />
+        </div>
+      </div>
+    </div>
+
+
+    {/* Contact */}
+
+    <div
+      style={{
+        padding:
+          style === "Luxury"
+            ? "50px 40px"
+            : style === "Vintage"
+            ? "44px 32px"
+            : style === "Minimal"
+            ? "32px 24px"
+            : "44px 32px",
+      }}
+    >
+      <div
+        className="rounded-2xl text-center"
         style={{
-          backgroundColor: currentTheme.accent,
-          color: currentTheme.text,
+          backgroundColor: currentTheme.background,
+          border: `1px solid ${currentTheme.accent}`,
           padding:
             style === "Luxury"
-              ? "28px"
-              : style === "Vintage"
-              ? "24px"
+              ? "40px"
               : style === "Minimal"
-              ? "16px"
-              : "24px",
+              ? "24px"
+              : "32px",
         }}
       >
+        <h3
+          className="font-bold"
+          style={{
+            fontSize:
+              style === "Luxury"
+                ? "34px"
+                : style === "Vintage"
+                ? "32px"
+                : style === "Minimal"
+                ? "26px"
+                : "30px",
+            color: currentTheme.accent,
+          }}
+        >
+          Visit Us
+        </h3>
 
+        <p className="mt-4 opacity-80">
+          {location || "Downtown"}
+        </p>
+
+        <p className="mt-2 opacity-70">
+          Open Daily · 8:00 AM - 10:00 PM
+        </p>
+
+        <button
+          className="mt-6 px-7 py-3 font-bold"
+          style={{
+            backgroundColor: currentTheme.accent,
+            color: currentTheme.text,
+            borderRadius: currentStyle.borderRadius,
+          }}
+        >
+          Reserve a Table
+        </button>
+      </div>
+    </div>
+
+
+    {/* Footer */}
+
+    <div
+      className="text-center"
+      style={{
+        backgroundColor: currentTheme.accent,
+        color: currentTheme.text,
+        padding:
+          style === "Luxury"
+            ? "28px"
+            : style === "Vintage"
+            ? "24px"
+            : style === "Minimal"
+            ? "16px"
+            : "24px",
+      }}
+    >
       <h4
         className="font-bold"
         style={{
@@ -935,8 +1210,7 @@ export default function Home() {
       <p className="mt-4 text-sm opacity-80">
         © 2026 {cafeName || "Moonlight Coffee"} · Powered by CafeAI
       </p>
-
-      </div>
+    </div>
 
 
       </div>
