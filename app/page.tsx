@@ -64,24 +64,28 @@ export default function Home() {
       borderRadius: "24px",
       fontFamily: "Arial, sans-serif",
       letterSpacing: "0px",
+      boxShadow: "0 10px 30px rgba(0,0,0,0.25)",
     },
 
     Luxury: {
       borderRadius: "12px",
       fontFamily: "Georgia, serif",
       letterSpacing: "1px",
+      boxShadow: "0 20px 50px rgba(0,0,0,0.45)",
     },
 
     Vintage: {
       borderRadius: "8px",
       fontFamily: "Georgia, serif",
       letterSpacing: "0.5px",
+      boxShadow: "0 12px 35px rgba(60,30,10,0.35)",
     },
 
     Minimal: {
       borderRadius: "4px",
       fontFamily: "Arial, sans-serif",
       letterSpacing: "0px",
+      boxShadow: "0 4px 15px rgba(0,0,0,0.15)",
     },
   };
 
@@ -254,7 +258,7 @@ export default function Home() {
             {/* Cafe Preview */}
             <div
               className="
-                h-72
+                h-96
                 rounded-2xl
                 bg-gradient-to-br
                 from-amber-900
@@ -393,7 +397,7 @@ export default function Home() {
 
         <section className="px-6 py-20">
 
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
 
         <h2 className="text-4xl font-bold text-center">
         Create Your Cafe With AI
@@ -575,6 +579,7 @@ export default function Home() {
         borderRadius: currentStyle.borderRadius,
         fontFamily: currentStyle.fontFamily,
         letterSpacing: currentStyle.letterSpacing,
+        boxShadow: currentStyle.boxShadow,
       }}
       >
 
@@ -628,7 +633,11 @@ export default function Home() {
       </p>
 
       <button
-        onClick={() => alert("Reservation feature coming soon!")}
+        onClick={() =>
+          alert(
+            `Thank you for choosing ${cafeName || "Moonlight Coffee"}! Reservation requests are now available.`
+          )
+        }
         className="
           px-5
           py-2
@@ -907,6 +916,10 @@ export default function Home() {
       >
         {cafeName || "Moonlight Coffee"}
       </h4>
+
+      <p className="mt-2">
+        {location || "Downtown"}
+      </p>
 
       <p className="mt-2">
         Open Daily · 8:00 AM - 10:00 PM
