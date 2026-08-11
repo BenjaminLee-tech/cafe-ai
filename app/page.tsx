@@ -85,26 +85,30 @@ export default function Home() {
     },
   };
 
-    const menuItems = [
+  const menuItems = [
     {
       name: "Espresso",
       price: "$4",
       icon: "☕",
+      description: "Rich and bold espresso with a smooth finish.",
     },
     {
       name: "Signature Cake",
       price: "$6",
       icon: "🍰",
+      description: "A freshly baked house specialty made with care.",
     },
     {
       name: "Croissant",
       price: "$5",
       icon: "🥐",
+      description: "Buttery, flaky, and freshly baked every morning.",
     },
     {
       name: "Iced Latte",
       price: "$5",
       icon: "🥤",
+      description: "Smooth espresso blended with chilled creamy milk.",
     },
   ];
   
@@ -685,21 +689,19 @@ export default function Home() {
       </p>
 
       <button
+        onClick={() => alert("Reservation feature coming soon!")}
         className="
+          px-5
+          py-2
           font-bold
+          transition-all
+          duration-300
+          hover:scale-105
         "
         style={{
           backgroundColor: currentTheme.accent,
           color: currentTheme.text,
           borderRadius: currentStyle.borderRadius,
-          padding:
-            style === "Luxury"
-              ? "12px 24px"
-              : style === "Vintage"
-              ? "10px 22px"
-              : style === "Minimal"
-              ? "8px 18px"
-              : "10px 20px",
         }}
       >
         Reserve
@@ -759,30 +761,33 @@ export default function Home() {
       text-center
       "
       style={{
-        backgroundColor:
+        background:
           style === "Luxury"
-            ? "rgba(0,0,0,0.55)"
+            ? "linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0.70))"
             : style === "Vintage"
-            ? "rgba(0,0,0,0.48)"
+            ? "linear-gradient(to bottom, rgba(80,50,20,0.20), rgba(40,20,10,0.65))"
             : style === "Minimal"
-            ? "rgba(0,0,0,0.30)"
-            : "rgba(0,0,0,0.40)",
+            ? "linear-gradient(to bottom, rgba(255,255,255,0.05), rgba(0,0,0,0.35))"
+            : "linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0.55))",
       }}
       >
 
-      <div>
+      <div className="px-4 md:px-8">
 
       <h1
-        className="text-5xl font-bold"
+        className={`
+          font-bold
+          ${
+            style === "Luxury"
+              ? "text-4xl md:text-6xl"
+              : style === "Vintage"
+              ? "text-4xl md:text-5xl"
+              : style === "Minimal"
+              ? "text-3xl md:text-4xl"
+              : "text-4xl md:text-5xl"
+          }
+        `}
         style={{
-        fontSize:
-          style === "Luxury"
-            ? "56px"
-            : style === "Vintage"
-            ? "52px"
-            : style === "Minimal"
-            ? "42px"
-            : "48px",
           letterSpacing: currentStyle.letterSpacing,
           color: currentTheme.text,
         }}
@@ -791,17 +796,19 @@ export default function Home() {
       </h1>
 
       <p
-        className="mt-4"
-        style={{
-          fontSize:
+        className={`
+          mt-4
+          ${
             style === "Luxury"
-              ? "20px"
+              ? "text-base md:text-xl"
               : style === "Vintage"
-              ? "19px"
+              ? "text-base md:text-lg"
               : style === "Minimal"
-              ? "16px"
-              : "18px",
-
+              ? "text-sm md:text-base"
+              : "text-base md:text-lg"
+          }
+        `}
+        style={{
           letterSpacing: currentStyle.letterSpacing,
           color: currentTheme.text,
         }}
@@ -903,6 +910,15 @@ export default function Home() {
               {item.name}
             </h4>
 
+            <p
+              className="mt-2 opacity-70"
+              style={{
+                fontSize: style === "Minimal" ? "13px" : "14px",
+              }}
+            >
+              {item.description}
+            </p>
+
             <div
               className="mt-4 font-bold"
               style={{
@@ -937,9 +953,29 @@ export default function Home() {
         }}
       >
 
-      Open Daily
-      <br/>
-      8:00 AM - 10:00 PM
+      <h4
+        className="font-bold"
+        style={{
+          fontSize:
+            style === "Luxury"
+              ? "22px"
+              : style === "Vintage"
+              ? "20px"
+              : style === "Minimal"
+              ? "18px"
+              : "20px",
+        }}
+      >
+        {cafeName || "Moonlight Coffee"}
+      </h4>
+
+      <p className="mt-2">
+        Open Daily · 8:00 AM - 10:00 PM
+      </p>
+
+      <p className="mt-4 text-sm opacity-80">
+        © 2026 {cafeName || "Moonlight Coffee"} · Powered by CafeAI
+      </p>
 
       </div>
 
