@@ -644,6 +644,31 @@ export default function Home() {
       }}
       >
 
+      {/* Website Navigation */}
+
+      <nav
+        className="px-6 py-5 flex items-center justify-between"
+        style={{
+          borderBottom: `1px solid ${currentTheme.accent}44`,
+        }}
+      >
+        <div
+          className="font-bold text-xl"
+          style={{
+            color: currentTheme.accent,
+          }}
+        >
+          {cafeName || "Your Cafe"}
+        </div>
+
+        <div className="flex gap-5 text-sm font-semibold">
+          <a href="#home">Home</a>
+          <a href="#menu">Menu</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+
   {/* Website Header */}
 
   <div
