@@ -1220,22 +1220,48 @@ export default function Home() {
       {generated && (
 
         
-      <div
-        className="
-          mt-10
-          rounded-2xl
-          p-8
-          border
-        "
-        style={{
-          backgroundColor: currentTheme.background,
-          borderColor: currentTheme.accent,
-          color: currentTheme.text,
-        }}
-      >
+    <div
+      className="
+        mt-10
+        p-8
+        border
+        transition-all
+        duration-500
+      "
+      style={{
+        backgroundColor: currentTheme.background,
+        borderColor: currentTheme.accent,
+        color: currentTheme.text,
+
+        borderRadius:
+          style === "Luxury"
+            ? "32px"
+            : style === "Vintage"
+            ? "18px"
+            : style === "Minimal"
+            ? "4px"
+            : "16px",
+
+        borderWidth:
+          style === "Vintage"
+            ? "3px"
+            : style === "Luxury"
+            ? "2px"
+            : "1px",
+
+        boxShadow:
+          style === "Luxury"
+            ? `0 25px 70px ${currentTheme.accent}88`
+            : style === "Vintage"
+            ? `0 15px 40px ${currentTheme.accent}55`
+            : style === "Minimal"
+            ? "none"
+            : `0 10px 30px ${currentTheme.accent}44`,
+      }}
+    >
 
       <h3
-        className="font-bold"
+        className="font-bold transition-all duration-500"
         style={{
           fontSize:
             style === "Luxury"
@@ -1246,6 +1272,29 @@ export default function Home() {
               ? "30px"
               : "36px",
 
+          fontFamily:
+            style === "Luxury"
+              ? "Georgia, serif"
+              : style === "Vintage"
+              ? "Georgia, serif"
+              : style === "Minimal"
+              ? "Arial, sans-serif"
+              : "Inter, Arial, sans-serif",
+
+          letterSpacing:
+            style === "Luxury"
+              ? "3px"
+              : style === "Vintage"
+              ? "1px"
+              : style === "Minimal"
+              ? "0px"
+              : "1px",
+
+          textTransform:
+            style === "Luxury"
+              ? "uppercase"
+              : "none",
+
           color: currentTheme.text,
         }}
       >
@@ -1253,40 +1302,112 @@ export default function Home() {
       </h3>
 
 
-      <p className="mt-3 text-gray-300">
-      AI generated style:
-      {style}
+    <div
+      className="mt-4 space-y-2 transition-all duration-500"
+      style={{
+        fontFamily:
+          style === "Luxury"
+            ? "Georgia, serif"
+            : style === "Vintage"
+            ? "Georgia, serif"
+            : style === "Minimal"
+            ? "Arial, sans-serif"
+            : "Inter, Arial, sans-serif",
+
+        opacity:
+          style === "Minimal"
+            ? 0.75
+            : 1,
+      }}
+    >
+      <p
+        style={{
+          color: currentTheme.text,
+          fontSize:
+            style === "Luxury"
+              ? "17px"
+              : style === "Vintage"
+              ? "16px"
+              : style === "Minimal"
+              ? "14px"
+              : "15px",
+        }}
+      >
+        AI generated style: <strong>{style}</strong>
       </p>
 
-
-      <p className="text-gray-300">
-      Location:
-      {location || "Global"}
+      <p
+        style={{
+          color: currentTheme.text,
+          fontSize:
+            style === "Minimal"
+              ? "14px"
+              : "15px",
+        }}
+      >
+        Location: <strong>{location || "Global"}</strong>
       </p>
 
-
-      <p className="text-gray-300">
-      Theme:
-      {color}
+      <p
+        style={{
+          color: currentTheme.text,
+          fontSize:
+            style === "Minimal"
+              ? "14px"
+              : "15px",
+        }}
+      >
+        Theme: <strong>{color}</strong>
       </p>
+    </div>
 
 
       <div
         className="
           mt-6
           h-56
-          rounded-xl
           flex
           flex-col
           items-center
           justify-center
+          transition-all
+          duration-500
         "
         style={{
-          background: `linear-gradient(
-            135deg,
-            ${currentTheme.accent},
-            ${currentTheme.background}
-          )`,
+          background:
+            style === "Luxury"
+              ? `linear-gradient(
+                  135deg,
+                  ${currentTheme.accent},
+                  ${currentTheme.background}
+                )`
+              : style === "Vintage"
+              ? `linear-gradient(
+                  135deg,
+                  ${currentTheme.background},
+                  #6b4423
+                )`
+              : style === "Minimal"
+              ? currentTheme.background
+              : `linear-gradient(
+                  135deg,
+                  ${currentTheme.background},
+                  ${currentTheme.accent}
+                )`,
+
+          borderRadius:
+            style === "Luxury"
+              ? "28px"
+              : style === "Vintage"
+              ? "18px"
+              : style === "Minimal"
+              ? "6px"
+              : "16px",
+
+          border:
+            style === "Minimal"
+              ? `1px solid ${currentTheme.accent}`
+              : "none",
         }}
       >
 
@@ -1296,13 +1417,14 @@ export default function Home() {
 
       <button
         onClick={() => {
-          window.print();
+          setGenerated(false);
+          setProgress(0);
+          generateCafe();
         }}
         className="
-          mt-6
-          px-6
+          mt-4
+          px-8
           py-3
-          rounded-xl
           font-bold
           transition-all
           duration-300
@@ -1310,34 +1432,35 @@ export default function Home() {
           hover:brightness-110
         "
         style={{
-          backgroundColor: currentTheme.accent,
-          color: currentTheme.text,
-        }}
-      >
-        Download Website
-      </button>
+          backgroundColor:
+            style === "Luxury"
+              ? `${currentTheme.accent}22`
+              : style === "Vintage"
+              ? "#6b442333"
+              : style === "Minimal"
+              ? "transparent"
+              : `${currentTheme.accent}18`,
 
-      <button
-        onClick={() => {
-          setGenerated(false);
-          setProgress(0);
-          generateCafe();
+          color: currentTheme.text,
+
+          border:
+            style === "Luxury"
+              ? `1px solid ${currentTheme.accent}`
+              : style === "Vintage"
+              ? "2px solid #6b4423"
+              : style === "Minimal"
+              ? `1px solid ${currentTheme.accent}`
+              : `1px solid ${currentTheme.accent}`,
+
+          borderRadius:
+            style === "Luxury"
+              ? "30px"
+              : style === "Vintage"
+              ? "8px"
+              : style === "Minimal"
+              ? "4px"
+              : "12px",
         }}
-        className="
-          mt-4
-          px-6
-          py-3
-          rounded-xl
-          font-bold
-          transition-all
-          duration-300
-          hover:scale-105
-          hover:brightness-110
-          bg-white/10
-          border
-          border-white/20
-          text-white
-        "
       >
         Regenerate Website
       </button>
