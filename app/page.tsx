@@ -679,7 +679,7 @@ export default function Home() {
           color: currentTheme.text,
         }}
       >
-        Home
+        <a href="#home">Home</a>
       </button>
 
       <button
@@ -688,7 +688,7 @@ export default function Home() {
           color: currentTheme.text,
         }}
       >
-        Menu
+        <a href="#menu">Menu</a>
       </button>
 
       <button
@@ -697,7 +697,7 @@ export default function Home() {
           color: currentTheme.text,
         }}
       >
-        About
+        <a href="#about">About</a>
       </button>
 
     </div>
@@ -705,43 +705,40 @@ export default function Home() {
 
     {/* Reserve Button */}
 
-    <button
-      onClick={() =>
-        alert(
-          `Reservation request for ${
-            cafeName || "Moonlight Coffee"
-          }\nLocation: ${
-            location || "Downtown"
-          }\n\nPlease contact the cafe to complete your reservation.`
-        )
-      }
-      className="
-        px-6
-        py-2.5
-        font-bold
-        transition-all
-        duration-300
-        hover:scale-105
-        hover:brightness-110
-      "
-      style={{
-        backgroundColor: currentTheme.accent,
-        color: currentTheme.text,
-        borderRadius: currentStyle.borderRadius,
-      }}
-    >
-      Reserve
-    </button>
+  <button
+    onClick={() => {
+      document.getElementById("contact")?.scrollIntoView({
+        behavior: "smooth",
+      });
+    }}
+    className="
+      px-6
+      py-2.5
+      font-bold
+      transition-all
+      duration-300
+      hover:scale-105
+      hover:brightness-110
+    "
+    style={{
+      backgroundColor: currentTheme.accent,
+      color: currentTheme.text,
+      borderRadius: currentStyle.borderRadius,
+    }}
+  >
+    Reserve
+  </button>
 
   </div>
 
 
       {/* Hero */}
 
-      <div
-        className="
-          relative
-        "
+    <div
+      id="home"
+      className="
+        relative
+      "
         style={{
           height:
             style === "Luxury"
@@ -840,6 +837,7 @@ export default function Home() {
       {/* Menu */}
 
       <div
+        id="menu"
         style={{
           padding:
             style === "Luxury"
@@ -955,6 +953,7 @@ export default function Home() {
     {/* About */}
 
     <div
+      id="about"
       style={{
         padding:
           style === "Luxury"
@@ -1103,6 +1102,7 @@ export default function Home() {
     {/* Contact */}
 
     <div
+      id="contact"
       style={{
         padding:
           style === "Luxury"
