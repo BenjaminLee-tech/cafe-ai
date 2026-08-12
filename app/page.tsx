@@ -13,6 +13,54 @@ export default function Home() {
   const [location, setLocation] = useState("");
   const [color, setColor] = useState("Dark Brown");
 
+  const menuByStyle = {
+    Luxury: [
+      { name: "Espresso Royale", price: "$8" },
+      { name: "Truffle Croissant", price: "$12" },
+      { name: "Gold Leaf Tiramisu", price: "$14" },
+    ],
+
+    Vintage: [
+      { name: "Classic Cappuccino", price: "$6" },
+      { name: "Old-Fashioned Latte", price: "$7" },
+      { name: "Homemade Apple Pie", price: "$8" },
+    ],
+
+    Minimal: [
+      { name: "Espresso", price: "$4" },
+      { name: "Flat White", price: "$5" },
+      { name: "Butter Croissant", price: "$5" },
+    ],
+
+    Modern: [
+      { name: "Signature Latte", price: "$6" },
+      { name: "Cold Brew", price: "$6" },
+      { name: "Avocado Toast", price: "$10" },
+    ],
+  };
+
+  const currentMenu =
+    menuByStyle[style as keyof typeof menuByStyle];
+
+  const descriptionByStyle = {
+    Luxury:
+      "An elegant café experience featuring premium coffee and refined pastries.",
+
+    Vintage:
+      "A charming classic café bringing together traditional coffee and homemade treats.",
+
+    Minimal:
+      "Simple coffee. Fresh ingredients. A quiet place to enjoy your day.",
+
+    Modern:
+      "A contemporary café combining specialty coffee, fresh food, and modern design.",
+  };
+
+  const currentDescription =
+    descriptionByStyle[
+      style as keyof typeof descriptionByStyle
+    ];
+
 
   const generateCafe = () => {
     setLoading(true);
@@ -1301,6 +1349,41 @@ export default function Home() {
         {cafeName || "Your Cafe"}
       </h3>
 
+      <div className="mt-4">
+        <p
+          className="text-xs uppercase tracking-widest font-semibold"
+          style={{
+            color: currentTheme.accent,
+          }}
+        >
+          About this café
+        </p>
+
+        <p
+          className="mt-2 max-w-2xl leading-relaxed"
+          style={{
+            color: currentTheme.text,
+            opacity: 0.85,
+
+            fontFamily:
+              style === "Luxury" || style === "Vintage"
+                ? "Georgia, serif"
+                : "Arial, sans-serif",
+
+            fontSize:
+              style === "Luxury"
+                ? "17px"
+                : style === "Vintage"
+                ? "16px"
+                : style === "Minimal"
+                ? "14px"
+                : "15px",
+          }}
+        >
+          {currentDescription}
+        </p>
+      </div>
+
 
     <div
       className="mt-4 space-y-2 transition-all duration-500"
@@ -1465,6 +1548,106 @@ export default function Home() {
         Regenerate Website
       </button>
 
+      </div>
+
+      <div
+        className="mt-8 transition-all duration-500"
+        style={{
+          fontFamily:
+            style === "Luxury" || style === "Vintage"
+              ? "Georgia, serif"
+              : "Arial, sans-serif",
+        }}
+      >
+        <h4
+          className="font-bold"
+          style={{
+            color: currentTheme.text,
+
+            fontSize:
+              style === "Luxury"
+                ? "32px"
+                : style === "Vintage"
+                ? "30px"
+                : style === "Minimal"
+                ? "24px"
+                : "28px",
+
+            letterSpacing:
+              style === "Luxury"
+                ? "2px"
+                : style === "Vintage"
+                ? "1px"
+                : "0px",
+
+            textTransform:
+              style === "Luxury"
+                ? "uppercase"
+                : "none",
+          }}
+        >
+          Our Menu
+        </h4>
+
+        <div className="mt-5 grid gap-4 md:grid-cols-3">
+          {currentMenu.map((item) => (
+            <div
+              key={item.name}
+              className="p-5 transition-all duration-300 hover:scale-105"
+              style={{
+                backgroundColor:
+                  style === "Minimal"
+                    ? "transparent"
+                    : `${currentTheme.accent}18`,
+
+                border:
+                  style === "Minimal"
+                    ? `1px solid ${currentTheme.accent}55`
+                    : `1px solid ${currentTheme.accent}33`,
+
+                borderRadius:
+                  style === "Luxury"
+                    ? "20px"
+                    : style === "Vintage"
+                    ? "10px"
+                    : style === "Minimal"
+                    ? "4px"
+                    : "14px",
+
+                boxShadow:
+                  style === "Luxury"
+                    ? `0 8px 25px ${currentTheme.accent}33`
+                    : style === "Vintage"
+                    ? `0 5px 15px ${currentTheme.accent}22`
+                    : "none",
+              }}
+            >
+              <div className="flex items-center justify-between gap-4">
+                <span
+                  className="font-semibold"
+                  style={{
+                    color: currentTheme.text,
+                    fontSize:
+                      style === "Minimal"
+                        ? "14px"
+                        : "16px",
+                  }}
+                >
+                  {item.name}
+                </span>
+
+                <span
+                  className="font-bold"
+                  style={{
+                    color: currentTheme.accent,
+                  }}
+                >
+                  {item.price}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
 
 
