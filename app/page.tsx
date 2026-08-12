@@ -1221,18 +1221,35 @@ export default function Home() {
 
         
       <div
-      className="
-      mt-10
-      rounded-2xl
-      bg-black/50
-      p-8
-      border
-      border-amber-500/40
-      "
+        className="
+          mt-10
+          rounded-2xl
+          p-8
+          border
+        "
+        style={{
+          backgroundColor: currentTheme.background,
+          borderColor: currentTheme.accent,
+          color: currentTheme.text,
+        }}
       >
 
-      <h3 className="text-3xl font-bold">
-      {cafeName || "Your Cafe"}
+      <h3
+        className="font-bold"
+        style={{
+          fontSize:
+            style === "Luxury"
+              ? "42px"
+              : style === "Vintage"
+              ? "38px"
+              : style === "Minimal"
+              ? "30px"
+              : "36px",
+
+          color: currentTheme.text,
+        }}
+      >
+        {cafeName || "Your Cafe"}
       </h3>
 
 
@@ -1254,21 +1271,76 @@ export default function Home() {
       </p>
 
 
-      <div className="
-      mt-6
-      h-40
-      rounded-xl
-      bg-gradient-to-br
-      from-amber-800
-      to-black
-      flex
-      items-center
-      justify-center
-      ">
+      <div
+        className="
+          mt-6
+          h-56
+          rounded-xl
+          flex
+          flex-col
+          items-center
+          justify-center
+        "
+        style={{
+          background: `linear-gradient(
+            135deg,
+            ${currentTheme.accent},
+            ${currentTheme.background}
+          )`,
+        }}
+      >
 
       <span className="text-2xl">
-      ☕ AI Website Ready
+        ☕ AI Website Ready
       </span>
+
+      <button
+        onClick={() => {
+          window.print();
+        }}
+        className="
+          mt-6
+          px-6
+          py-3
+          rounded-xl
+          font-bold
+          transition-all
+          duration-300
+          hover:scale-105
+          hover:brightness-110
+        "
+        style={{
+          backgroundColor: currentTheme.accent,
+          color: currentTheme.text,
+        }}
+      >
+        Download Website
+      </button>
+
+      <button
+        onClick={() => {
+          setGenerated(false);
+          setProgress(0);
+          generateCafe();
+        }}
+        className="
+          mt-4
+          px-6
+          py-3
+          rounded-xl
+          font-bold
+          transition-all
+          duration-300
+          hover:scale-105
+          hover:brightness-110
+          bg-white/10
+          border
+          border-white/20
+          text-white
+        "
+      >
+        Regenerate Website
+      </button>
 
       </div>
 
