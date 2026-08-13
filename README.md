@@ -4,15 +4,45 @@ AI-powered cafe website builder.
 
 ## Overview
 
-CafeAI helps cafe owners create beautiful websites using AI.
+CafeAI is a Next.js web application concept that helps cafe owners quickly create a modern cafe website by entering basic information and selecting a visual style and theme.
+
+The project demonstrates a complete frontend development workflow, including dynamic UI generation, responsive design, Git/GitHub version control, and production deployment with Vercel.
 
 ## Features
 
-- Modern cafe landing page
-- AI website generation concept
+- Dynamic cafe name and location
+- Cafe website generation workflow
+- Multiple visual styles
+- Multiple color themes
+- Dynamic website preview
+- AI-generated cafe descriptions
+- Generated website navigation
+- Menu section
+- About section
+- Experience section
+- Visit Us section
 - Responsive design
-- Next.js + TypeScript
-- Tailwind CSS
+- Production deployment on Vercel
+
+## Visual Styles
+
+CafeAI currently supports several visual styles, including:
+
+- Modern
+- Luxury
+- Vintage
+- Minimal
+
+## Themes
+
+Available themes include:
+
+- Dark Brown
+- Gold
+- Black
+- Cream
+
+The selected style and theme dynamically affect the generated cafe website preview.
 
 ## Tech Stack
 
@@ -20,42 +50,20 @@ CafeAI helps cafe owners create beautiful websites using AI.
 - React
 - TypeScript
 - Tailwind CSS
+- JavaScript
+- Git
+- GitHub
+- Vercel
 
-## Author
+## Project Structure
 
-Benjamin Lee
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```text
+cafe-ai/
+├── app/
+├── public/
+│   └── images/
+├── package.json
+├── tsconfig.json
+├── next.config.ts
+├── postcss.config.mjs
+└── README.md
