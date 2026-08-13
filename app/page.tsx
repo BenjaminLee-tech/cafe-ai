@@ -7,6 +7,8 @@ export default function Home() {
   const [generated, setGenerated] = useState(false);
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [error, setError] = useState("");
+  const [reservationMessage, setReservationMessage] = useState("");
 
   const [cafeName, setCafeName] = useState("");
   const [style, setStyle] = useState("Modern");
@@ -66,6 +68,7 @@ export default function Home() {
     setLoading(true);
     setGenerated(false);
     setProgress(0);
+    setError("");
 
     let value = 0;
 
@@ -1226,6 +1229,9 @@ export default function Home() {
         </p>
 
         <button
+          onClick={() => {
+            setReservationMessage("Reservation request received!");
+          }}
           className="mt-6 px-7 py-3 font-bold"
           style={{
             backgroundColor: currentTheme.accent,
@@ -1233,8 +1239,14 @@ export default function Home() {
             borderRadius: currentStyle.borderRadius,
           }}
         >
-          Reserve a Table
+          {reservationMessage ? "Reservation Requested" : "Reserve a Table"}
         </button>
+
+        {reservationMessage && (
+          <p className="mt-4 font-bold">
+            {reservationMessage}
+          </p>
+        )}
       </div>
     </div>
 
